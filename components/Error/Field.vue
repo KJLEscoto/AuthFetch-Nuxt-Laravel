@@ -1,5 +1,5 @@
 <template>
-  <div v-if="error" class="text-red-400 text-sm">
+  <div v-if="error" class="text-red-400 text-sm text-wrap">
     {{ error[0] }}
   </div>
 </template>

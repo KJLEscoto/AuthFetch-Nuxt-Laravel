@@ -13,9 +13,8 @@
 
       <div class="flex items-center gap-2">
         <p>Framework Used:</p>
-        <div>
-          Nuxt Laravel
-        </div>
+        <Tag className="bg-[#109c3a]" icon="nuxt" iconClass="w-4 h-4" title="nuxt" path="https://nuxt.com/" />
+        <Tag className="bg-[#9c1010]" icon="laravel" iconClass="w-4 h-4" title="laravel" path="https://laravel.com/" />
       </div>
     </div>
   </div>

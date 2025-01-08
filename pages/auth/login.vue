@@ -24,10 +24,10 @@
       </div>
 
       <!-- Submit Button -->
-      <div class="w-full">
+      <div class="w-full items-center flex flex-col gap-2">
         <input
-          class="cursor-pointer px-3 py-2 bg-gray-700 text-white rounded shadow-lg hover:bg-gray-600 active:bg-gray-800 w-full"
-          type="submit" value="Login">
+          type="submit" value="Login" :disabled="load" :class="load ? 'hidden' : 'cursor-pointer px-3 py-2 bg-gray-700 text-white rounded shadow-lg hover:bg-gray-600 active:bg-gray-800 w-full'"> 
+        <Icon v-if="load" name="spinner"/>
       </div>
 
       <div class="opacity-50 w-fit mx-auto text-sm font-extralight pb-5">
@@ -49,11 +49,15 @@ const state = reactive({
   errors: {},
 });
 
+const load = ref(false)
+
 async function login() {
   const params = {
     email: state.user.email,
     password: state.user.password,
   };
+
+  load.value = true
 
   try {
     const result = await $fetch('http://localhost:8000/api/login', {
@@ -63,7 +67,7 @@ async function login() {
 
     // Set authentication token
     cookie.value = result;
-
+    load.value = false
     // Navigate to dashboard
     navigateTo('/dashboard');
 
@@ -74,6 +78,7 @@ async function login() {
 
   } catch (error) {
     console.error('Error during login:', error.data);
+    load.value = false
 
     // Assign general message error if present
     state.errors.message = error.data.message || 'An error occurred during login.';

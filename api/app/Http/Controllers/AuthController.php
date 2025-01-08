@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function getUsers(Request $request)
     {
         // Fetch all users (you can customize the query as needed)
-        $users = User::select('id', 'name', 'email', 'created_at')->get();
+        $users = User::select('id', 'name', 'email', 'created_at')->latest()->get();
         // Return the users as JSON response
         return response()->json([
             'users' => $users

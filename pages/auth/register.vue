@@ -34,15 +34,16 @@
       <!-- Input for Confirm Password -->
       <div class="space-y-1">
         <Label for="confirm_password" label="Confirm Password" />
-        <Field type="password" v-model="state.user.confirm_password" id="confirm_password" name="confirm_password" required />
+        <Field type="password" v-model="state.user.confirm_password" id="confirm_password" name="confirm_password"
+          required />
         <ErrorField :error="state.errors.confirm_password" />
       </div>
 
       <!-- Submit Button -->
-      <div class="w-full">
-        <input
-          class="cursor-pointer px-3 py-2 bg-gray-700 text-white rounded shadow-lg hover:bg-gray-600 active:bg-gray-800 w-full"
-          type="submit" value="Register">
+      <div class="w-full items-center flex flex-col gap-2">
+        <input type="submit" value="Register" :disabled="load"
+          :class="load ? 'hidden' : 'cursor-pointer px-3 py-2 bg-gray-700 text-white rounded shadow-lg hover:bg-gray-600 active:bg-gray-800 w-full'">
+        <Icon v-if="load" name="spinner" />
       </div>
 
       <div class="opacity-50 w-fit mx-auto text-sm font-extralight pb-5">
@@ -56,6 +57,8 @@
 <script setup>
 
 const cookie = useCookie('my_auth_token')
+
+const load = ref(false)
 
 const state = reactive({
   user: {
@@ -74,6 +77,8 @@ async function register() {
     password: state.user.password,
     password_confirmation: state.user.confirm_password,
   }
+
+  load.value = true
 
   try {
     const result = await $fetch("http://localhost:8000/api/register", {
@@ -94,9 +99,13 @@ async function register() {
     state.user.confirm_password = ''
     state.errors = {}; // Clear errors
 
+    load.value = true
     navigateTo('/auth/login')
+
   } catch (error) {
     console.error('Error during login:', error.data);
+
+    load.value = false
 
     // Assign general message error if present
     state.errors.message = error.data.message || 'An error occurred during login.';

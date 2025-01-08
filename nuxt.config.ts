@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       ],
       link: [
         {
-          rel: 'shortcut icon', type: 'icon/ico', href: '/favicon.ico'
+          rel: 'shortcut icon', type: 'image/png', href: '/laranuxt.png'
         }
       ]
     }
