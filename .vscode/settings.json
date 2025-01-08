@@ -1,0 +1,21 @@
+{
+  "editor.inlayHints.enabled": "off",
+  "editor.codeLens": false,
+  "php.suggest.basic": false,
+
+  "php.inlayHints.parameters.byReference": false,
+  "php.inlayHints.parameters.enabled": false,
+  "php.inlayHints.types.return": false,
+  "php.inlayHints.types.suppressVariableFromLiteral": false,
+  "php.inlayHints.types.lambdaParameter": false,
+  "vue.inlayHints.missingProps": true,
+  "workbench.colorTheme": "One Dark Pro Darker",
+
+  "files.associations": {
+  "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+
+}

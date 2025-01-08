@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  html, body {
+    @apply scroll-smooth bg-black text-white overflow-auto h-auto w-auto tracking-wide font-serif 
+  }
+}
